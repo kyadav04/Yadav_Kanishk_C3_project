@@ -69,6 +69,23 @@ class RestaurantTest {
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
     }
-
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void display_zero_if_no_item_is_selected(){
+        restaurant =createRestaurant();
+        addItemsToRestaurantMenu();
+        int total = 0;
+        assertEquals(0,total);
+    }
+
+    @Test
+    public void select_item_from_list_should_return_total_amount_of_the_selected_order(){
+        restaurant = createRestaurant();
+        addItemsToRestaurantMenu();
+        int item1 = restaurant.orderTotal(restaurant.getName().get(0));
+        int item2 = restaurant.orderTotal(restaurant.getMenu().get(1));
+        int total = item1 + item2;
+        assertEquals(388,total);
+    }
 }
